@@ -1,0 +1,25 @@
+set(SOURCES
+    src/custom_status_screen.c
+    src/assets/images.c
+    src/widgets/battery.c
+    src/widgets/output.c
+    src/widgets/util.c
+)
+
+if(NOT CONFIG_ZMK_SPLIT OR CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
+    list(APPEND SOURCES
+        src/layer.c
+        src/profile.c
+        src/screen.c
+        src/wpm.c
+    )
+else()
+    list(APPEND SOURCES
+        src/assets/crystal.c
+        src/widgets/animation.c
+        src/widgets/screen_peripheral.c
+    )
+endif()
+
+zephyr_library_include_directories(${CMAKE_SOURCE_DIR}/include/zmk_vfx_gem_status)
+zephyr_library_sources(${SOURCES})
